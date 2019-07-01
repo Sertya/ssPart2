@@ -1,75 +1,70 @@
-export class ModelAnimal {
-  loadJSON(controller){
-    let xhr = new XMLHttpRequest();
-    const url = "../data/petBase.json";
+export default class ModelAnimal {
 
-    xhr.addEventListener('load', function(controller, ev){
-        controller.showView(JSON.parse(this.responseText));
-        controller.pushToStock(JSON.parse(this.responseText));
-    }.bind(xhr, controller));
+  loadJSON(controller) {
+    fetch('./data/petBase.json')
+    .then( response => {
+      if(response.ok) {
+        return response.json();
+      }
+      throw new Error('Request failed');
+    })
+    .then(jsonResponse => {
+      localStorage.setItem('data', JSON.stringify(jsonResponse));
+      localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
+      controller.showView(jsonResponse);
+    });
+  }
 
-    xhr.open('GET', url);
-    xhr.send(); 
+  handleShoppingBasket(id, point) {
+    const data = JSON.parse(localStorage.getItem('data'));
+    const shoppingBasket = JSON.parse(localStorage.getItem('shoppingBasket'));
+    let result;
+    
+    data.forEach(element => {
+       if(element.id == id) {
+         if(id in shoppingBasket) {
+          if(point == 1 && shoppingBasket[id].count < element.number ||
+             point == -1 && shoppingBasket[id].count > 0) {
+              shoppingBasket[id].count += point;
+             } else {
+              result = id;
+             }
+         } else {
+          shoppingBasket[id] = {};
+          shoppingBasket[id].pic = element.pic;
+          shoppingBasket[id].name = element.name;
+          shoppingBasket[id].price = element.price;
+          shoppingBasket[id].count = 1;
+          shoppingBasket[id].left = element.number;
+         }
+         localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
+       }
+    });
+    
+    return result;
   }
-  // loadJSON() {
-  //   fetch('./data/petBase.json')
-  //   .then(response => {
-  //     if(response.ok) {
-  //       return response.json();
-  //     }
-  //     throw new Error('Request failed');
-  //   })
-  //   .then(jsonResponse => {
-  //     Base.pushingData(jsonResponse);
-  //   });
-  // }
-}
-class Pet {
-  constructor(element) {
-    this.id = element.id;
-    this.type = element.type;
-    this.name = element.name;
-    this.price = element.price;
-    this.number = element.number;
-    this.age = element.age;
-    this.weight = element.weight;
-    this.color = element.color;
-    this.gender = element.gender;
-    this.pic = element.pic;
+
+  handleData() {
+    const data = JSON.parse(localStorage.getItem('data'));
+    const shoppingBasket = JSON.parse(localStorage.getItem('shoppingBasket'));
+
+    for (const key in shoppingBasket) {
+      if (shoppingBasket.hasOwnProperty(key)) {
+        let index = data.findIndex(element => element.id == key);
+        data[index].number -= shoppingBasket[key].count;
+        delete shoppingBasket[key];
+      }
+    }
+    console.log(shoppingBasket);
+    console.log(data);
+     localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
+     localStorage.setItem('data', JSON.stringify(data));
+
+    // console.log(JSON.parse(localStorage.getItem('shoppingBasket')));
+    // console.log(JSON.parse(localStorage.getItem('data')));
+
   }
+ 
 }
 
-export class Dog extends Pet {
-  constructor(element) {
-    super(element);
-    this.fur = element.fur;
-    this.pedigree = element.pedigree;
-    this.docking = element.docking;
-    this.classification = element.classification;
-  }
-}
-
-export class Cat extends Pet {
-  constructor(element) {
-    super(element);
-    this.fur = element.fur;
-    this.pedigree = element.pedigree;
-  }
-}
-
-export class Fish extends Pet {
-  constructor(element) {
-    super(element);
-    this.water = element.water;
-    this.family = element.family;
-  }
-}
-
-export class Bird extends Pet {
-  constructor(element) {
-    super(element);
-    this.speaking = element.speaking;
-    this.singing = element.singing;
-  }
-}
 

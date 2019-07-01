@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Pet Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -14,17 +14,48 @@
 </head>
 <body>
     <nav>
-        <div class="nav-wrapper"> 
-          <a href="#" class="brand-logo"><i class="material-icons logo_icon">pets</i>Pet Shop</a>
+      <div class="nav-wrapper white"> 
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
+          <i class="material-icons">close</i>
         </div>
-      </nav>
+        <a href="#" class="brand-logo center black-text"><i class="material-icons logo_icon">pets</i>Pet Shop</a>
+        <a class="right btn-flat shopping_basket modal-trigger" href="#modal1"><i class="material-icons ">shopping_basket</i><span class="shopping_basket_count">(0)</span></a>
+      </div>
+    </nav>
     <div class="row">
-        <div class="col s2">
-          <!-- Grey navigation panel -->
-        </div>
-        <div class="col s10">
+        <ul class="categories">
+          <li class="category">DOGS</li>
+          <li class="category">CATS</li>
+          <li class="category">FISH</li>
+          <li class="category">BIRDS</li>
+        </ul>
+        <div class="col s12 to_show_animals">
           <!-- Teal page content  -->
-        </div>     
+        </div> 
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <i class="small material-icons right modal-close">close</i>
+        <h4 class="center">Shopping Basket</h4>
+        <div class="shopping_basket_items">
+          <!-- сюда отрендерятся позиции из корзины -->
+        </div>
+      </div>
+      <div class="row second">
+        <div class="col s12 shopping_basket_item_total">
+          <!-- сюда отрендерится общая стоимость заказа -->
+        </div>
+      </div>
+      <div class="center shopping_basket_checkout">
+        <a href="#!" class="modal-close waves-effect waves-light btn">checkout</a>
+      </div>
+      <div class="center shopping_basket_close">
+        <a href="#!" class="modal-close waves-effect waves-light btn-flat">close and continue shopping</a>
+      </div>
     </div>
 </body>
 </html>
+

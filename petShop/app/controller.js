@@ -1,44 +1,46 @@
-import {ModelAnimal, Cat, Dog, Fish, Bird} from './model.js';
+import ModelAnimal from './model.js';
 import ViewAnimal from './view.js';
-import Storage from './main.js';
+import ViewBasket from './viewBasket.js';
 
 export default class ControllerAnimal {
   constructor() {
     this.model = new ModelAnimal();
     this.view = new ViewAnimal();
+    this.viewBasket = new ViewBasket();
     this.init();
   }
 
   init() {
     this.model.loadJSON(this);
+    this.view.init(this);
+    this.viewBasket.init(this);
   }
 
   showView(data){
-    this.view.render(data);
+    this.view.render(data, this);
   }
 
-  pushToStock(data) {
-
-    data.forEach(el => {
-      switch (el.type) {
-        case 'dog':
-          Storage.stock.push(new Dog(el));
-          break;
-        case 'cat':
-          Storage.stock.push(new Cat(el));
-          break;
-        case 'fish':
-          Storage.stock.push(new Fish(el));
-          break;
-        case 'bird':
-          Storage.stock.push(new Bird(el));
-          break;
-        default:
-          throw {
-            name: 'Error',
-            message: `${el.type} doesn’t exist`
-          };
-      }
-    });
+  openBasket() {
+    this.viewBasket.renderItems(this);
   }
+
+  addToBasket(id) {
+
+    let idWarning = this.model.handleShoppingBasket(id, 1);
+    this.viewBasket.renderItems(this, idWarning);
+  }
+
+  removeFromBasket(id) {
+    this.model.handleShoppingBasket(id, -1);
+    this.viewBasket.renderItems(this);
+  }
+
+  checkout() {
+    this.model.handleData();
+    this.viewBasket.clearCountTotal();
+    let data = JSON.parse(localStorage.getItem('data'));
+    this.view.render(data, this);
+    
+  }
+
 }

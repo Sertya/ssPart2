@@ -1,16 +1,9 @@
-import ControllerAnimal from './controller.js';
-
-export default class Storage {
-
-  static lang = 'en';
-  static stock = [];
-  static vocabulary = [];
-
-  static init(){
-      let initial = new ControllerAnimal();
-
-  }
-
-}
+import Storage from './storage.js';
 
 document.addEventListener('DOMContentLoaded', Storage.init);
+
+document.addEventListener('DOMContentLoaded', function() {
+  M.AutoInit();
+  const elems = document.querySelectorAll('.modal');
+  const instance = M.Modal.init(elems);
+});
