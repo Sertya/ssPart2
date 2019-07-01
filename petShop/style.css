@@ -4,9 +4,6 @@
 .nav-wrapper .material-icons {
   display: unset;
 }
-.nav-wrapper span {
-  padding-bottom: 20px;
-}
 .input-field {
   position: absolute;
   width: 300px;
@@ -39,7 +36,6 @@
 .card .card-content .card-title {
   font-size: 18px;
   white-space: nowrap;
-  overflow: scroll;
 }
 .card .card-content p {
   margin-bottom: 8px;
@@ -58,9 +54,12 @@
   background-color: #ffffff;
   color: #000000;
 }
+/* .shopping_basket_container {
+  
+} */
 .modal-content .shopping_basket_items {
   max-height: 302px;
-  overflow: scroll;
+  overflow: auto;
 }
 .shopping_basket_item .card {
   box-shadow: none;
@@ -93,4 +92,11 @@
 }
 .warning {
   color: #EF9A9A;
+}
+.right.btn-flat.shopping_basket.modal-trigger {
+  height: auto;
+  display: flex
+}
+.shopping_basket_count {
+  line-height: 64px;
 }
