@@ -6,14 +6,13 @@ export default class ControllerAnimal {
   constructor() {
     this.model = new ModelAnimal();
     this.view = new ViewAnimal();
-    this.viewBasket = new ViewBasket();
+    this.viewBasket = new ViewBasket(this);
     this.init();
   }
 
   init() {
     this.model.loadJSON(this);
     this.view.init(this);
-    this.viewBasket.init(this);
   }
 
   showView(data){
@@ -25,13 +24,21 @@ export default class ControllerAnimal {
   }
 
   addToBasket(id) {
-
+    // console.log(id)
+    // console.log(this)
+    // console.log(this.model)
     let idWarning = this.model.handleShoppingBasket(id, 1);
+    //console.log(idWarning)
     this.viewBasket.renderItems(this, idWarning);
   }
 
-  removeFromBasket(id) {
+  reduceInBasket(id) {
     this.model.handleShoppingBasket(id, -1);
+    this.viewBasket.renderItems(this);
+  }
+
+  removeFromBasket(id) {
+    this.model.handleShoppingBasket(id, 0);
     this.viewBasket.renderItems(this);
   }
 

@@ -1,13 +1,13 @@
 export default class ViewBasket {
 
-  init(controller) {
-    let checkout = document.querySelector('.shopping_basket_checkout');
-    checkout.addEventListener('click', controller.checkout.bind(controller));
+  constructor(controller) {
+    this.checkoutBtn = document.querySelector('.shopping_basket_checkout');
+    this.checkoutBtn.addEventListener('click', controller.checkout.bind(controller));
   }
 
   renderItems(controller, idWarning) {
     let data = JSON.parse(localStorage.getItem('shoppingBasket')),
-        checkout = document.querySelector('.shopping_basket_checkout'),
+        counter = 0,
         totalCost = 0,
         totalCount = 0;
 
@@ -19,13 +19,23 @@ export default class ViewBasket {
       if(key == idWarning) {
         flag = true;
       }
-      this.buildItem(data, key, flag, controller);
-      totalCost += (data[key].price * data[key].count);
-      totalCount += data[key].count;
+      if(data[key].count > 0) {
+        this.buildItem(data, key, flag, controller);
+        totalCost += (data[key].price * data[key].count);
+        totalCount += data[key].count;
+        counter++;
+      }
+    }
+ 
+    if(totalCount == 1) {
+      document.querySelector('.reduce').classList.add('modal-close');
+    }
+
+    if(counter == 1) {
+      document.querySelector('.remove_from_basket').classList.add('modal-close');
     }
 
     this.countTotal(totalCost, totalCount);
-
   }
 
   buildItem(data, key, flag, controller) {
@@ -49,14 +59,17 @@ export default class ViewBasket {
             </div>
             <div class="count">
               <a class="btn-flat" href="#!">
-                  <i class="material-icons remove_from_basket">remove</i>
+                  <i class="material-icons reduce">remove</i>
               </a>
                 <span class="shopping_basket_item_count">${data[key].count}</span>
-              <a class="btn-flat add_to_basket" href="#!">
+              <a class="btn-flat increase" href="#!">
                   <i class="material-icons">add</i>
               </a>
-              <span class="warning hide">only ${data[key].left} left in store!</span>
+              <a class="btn-flat remove_from_basket" href="#!">
+                  <i class="material-icons">delete</i>
+              </a>
             </div>
+            <span class="warning hide">only ${data[key].left} left in store!</span>
          </div>
       </div>
     </div>`;
@@ -64,8 +77,13 @@ export default class ViewBasket {
     if(flag === true) {
       div.querySelector('.warning').classList.remove('hide');
     }
-    
-    div.querySelector('.add_to_basket')
+
+    //console.log(this.controller)
+
+    div.querySelector('.reduce')
+       .addEventListener('click', controller.reduceInBasket.bind(controller, key));
+
+    div.querySelector('.increase')
        .addEventListener('click', controller.addToBasket.bind(controller, key));
     
     div.querySelector('.remove_from_basket')
@@ -74,10 +92,6 @@ export default class ViewBasket {
     parentDiv.appendChild(div);
 
   }
-
-  // showWarning(id) {
-  //   document.querySelector('.warning').innerText = `!!!!!`;
-  // }
 
   countTotal(totalCost, totalCount) {
     let totalCostDiv = document.querySelector('.shopping_basket_item_total'),
@@ -98,6 +112,4 @@ export default class ViewBasket {
       items.removeChild(items.firstChild);
     }
   }
-
-
 }

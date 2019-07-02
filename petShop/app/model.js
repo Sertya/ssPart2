@@ -26,6 +26,8 @@ export default class ModelAnimal {
           if(point == 1 && shoppingBasket[id].count < element.number ||
              point == -1 && shoppingBasket[id].count > 0) {
               shoppingBasket[id].count += point;
+             } else if(point == 0){
+              shoppingBasket[id].count = 0;
              } else {
               result = id;
              }
@@ -62,7 +64,6 @@ export default class ModelAnimal {
 
     // console.log(JSON.parse(localStorage.getItem('shoppingBasket')));
     // console.log(JSON.parse(localStorage.getItem('data')));
-
   }
  
 }
