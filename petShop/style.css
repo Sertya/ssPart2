@@ -47,7 +47,7 @@
 }
 .modal {
   background-color: #ffffff;
-  max-height: 81%;
+  max-height: 87%;
 }
 .shopping_basket_checkout .btn {
   margin: 15px;
@@ -99,4 +99,8 @@
 }
 .shopping_basket_count {
   line-height: 64px;
+}
+.sign_in {
+  font-size: 18px;
+  margin: 15px 20px
 }

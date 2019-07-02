@@ -1,16 +1,22 @@
 import ModelAnimal from './model.js';
+import ViewStart from './viewStart.js';
 import ViewAnimal from './view.js';
 import ViewBasket from './viewBasket.js';
+
 
 export default class ControllerAnimal {
   constructor() {
     this.model = new ModelAnimal();
+    this.viewStart = new ViewStart();
     this.view = new ViewAnimal();
     this.viewBasket = new ViewBasket(this);
     this.init();
   }
 
   init() {
+    this.viewStart.showPic(this);
+  }
+  signIn() {
     this.model.loadJSON(this);
     this.view.init(this);
   }

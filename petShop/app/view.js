@@ -3,6 +3,24 @@ export default class ViewAnimal {
   init(controller) {
     document.querySelector('.shopping_basket')
             .addEventListener('click', controller.openBasket.bind(controller));
+
+    let section = document.querySelector('.for_views');
+
+    section.innerHTML = `<div class="row">
+       <ul class="categories">
+         <li class="category">DOGS</li>
+         <li class="category">CATS</li>
+         <li class="category">FISH</li>
+         <li class="category">BIRDS</li>
+       </ul>
+       <div class="col s12 to_show_animals">
+         <!-- Teal page content  -->
+       </div> 
+     </div>`;
+
+     document.querySelector('.input-field').classList.remove('hide');
+     document.querySelector('.shopping_basket.modal-trigger').classList.remove('hide');
+     document.querySelector('.sign_in').classList.add('hide');
   }
 
   render(data, controller){
