@@ -7,17 +7,20 @@ export default class ViewAnimal {
     let section = document.querySelector('.for_views');
 
     section.innerHTML = `<div class="row">
-       <ul class="categories">
-         <li class="category">DOGS</li>
-         <li class="category">CATS</li>
-         <li class="category">FISH</li>
-         <li class="category">BIRDS</li>
-       </ul>
-       <div class="col s12 to_show_animals">
-         <!-- Teal page content  -->
-       </div> 
-     </div>`;
-
+        <div class="col s2">
+          <ul class="categories">
+            <li class="category">DOGS</li>
+            <li class="category">CATS</li>
+            <li class="category">FISH</li>
+            <li class="category">BIRDS</li>
+          </ul>
+        </div>
+        <div class="col s10 to_show_animals">
+          <!-- Teal page content  -->
+        </div> 
+      </div>`;
+     
+     document.body.classList.remove('start_img')
      document.querySelector('.input-field').classList.remove('hide');
      document.querySelector('.shopping_basket.modal-trigger').classList.remove('hide');
      document.querySelector('.sign_in').classList.add('hide');

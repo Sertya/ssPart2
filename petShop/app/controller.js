@@ -17,8 +17,9 @@ export default class ControllerAnimal {
     this.viewStart.showPic(this);
   }
   signIn() {
-    this.model.loadJSON(this);
     this.view.init(this);
+    this.model.loadJSON(this);
+    
   }
 
   showView(data){

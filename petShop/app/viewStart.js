@@ -4,7 +4,7 @@ export default class ViewStart {
     
     let section = document.querySelector('.for_views');
 
-    section.innerHTML = `<img src="./img/pets.png" alt="">`;
+    document.body.classList.add('start_img');
 
     document.querySelector('.input-field').classList.add('hide');
     document.querySelector('.shopping_basket.modal-trigger').classList.add('hide');

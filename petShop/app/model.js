@@ -1,18 +1,37 @@
 export default class ModelAnimal {
 
   loadJSON(controller) {
-    fetch('./data/petBase.json')
-    .then( response => {
-      if(response.ok) {
-        return response.json();
-      }
-      throw new Error('Request failed');
-    })
-    .then(jsonResponse => {
-      localStorage.setItem('data', JSON.stringify(jsonResponse));
-      localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
-      controller.showView(jsonResponse);
-    });
+    // let data = JSON.parse(localStorage.getItem('data'));
+    // fetch('./data/petBase.json')
+    // .then( response => {
+    //   if(response.ok) {
+    //     return response.json();
+    //   }
+    //   throw new Error('Request failed');
+    // })
+    // .then(jsonResponse => {
+    //   localStorage.setItem('data', JSON.stringify(jsonResponse));
+    //   localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
+    //   controller.showView(jsonResponse);
+    // });
+    let data = JSON.parse(localStorage.getItem('data'));
+    if(!data) {
+      fetch('./data/petBase.json')
+      .then( response => {
+        if(response.ok) {
+          return response.json();
+        }
+        throw new Error('Request failed');
+      })
+      .then(jsonResponse => {
+        localStorage.setItem('data', JSON.stringify(jsonResponse));
+        localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
+        controller.showView(jsonResponse);
+      });
+    } else {
+      controller.showView(data);
+    }
+    
   }
 
   handleShoppingBasket(id, point) {
@@ -61,11 +80,7 @@ export default class ModelAnimal {
     console.log(data);
      localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
      localStorage.setItem('data', JSON.stringify(data));
-
-    // console.log(JSON.parse(localStorage.getItem('shoppingBasket')));
-    // console.log(JSON.parse(localStorage.getItem('data')));
   }
- 
 }
 
 
