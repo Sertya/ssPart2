@@ -1,8 +1,7 @@
 export default class ViewBasket {
 
   constructor(controller) {
-    this.checkoutBtn = document.querySelector('.shopping_basket_checkout');
-    this.checkoutBtn.addEventListener('click', controller.checkout.bind(controller));
+    this.controller = controller;
   }
 
   renderItems(controller, idWarning) {
@@ -77,8 +76,6 @@ export default class ViewBasket {
     if(flag === true) {
       div.querySelector('.warning').classList.remove('hide');
     }
-
-    //console.log(this.controller)
 
     div.querySelector('.reduce')
        .addEventListener('click', controller.reduceInBasket.bind(controller, key));

@@ -1,8 +1,9 @@
 export default class ViewAnimal {
 
   init(controller) {
-    document.querySelector('.shopping_basket')
-            .addEventListener('click', controller.openBasket.bind(controller));
+    
+    document.querySelector('.input-field')
+            .addEventListener('input', controller.searchPets.bind(controller));
 
     let section = document.querySelector('.for_views');
 
@@ -23,7 +24,10 @@ export default class ViewAnimal {
      document.body.classList.remove('start_img')
      document.querySelector('.input-field').classList.remove('hide');
      document.querySelector('.shopping_basket.modal-trigger').classList.remove('hide');
+     document.querySelector('.history').classList.remove('hide');
      document.querySelector('.sign_in').classList.add('hide');
+
+     document.querySelector('.checkout').addEventListener('click', controller.checkout.bind(controller));
   }
 
   render(data, controller){

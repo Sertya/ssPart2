@@ -1,19 +1,6 @@
 export default class ModelAnimal {
 
   loadJSON(controller) {
-    // let data = JSON.parse(localStorage.getItem('data'));
-    // fetch('./data/petBase.json')
-    // .then( response => {
-    //   if(response.ok) {
-    //     return response.json();
-    //   }
-    //   throw new Error('Request failed');
-    // })
-    // .then(jsonResponse => {
-    //   localStorage.setItem('data', JSON.stringify(jsonResponse));
-    //   localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
-    //   controller.showView(jsonResponse);
-    // });
     let data = JSON.parse(localStorage.getItem('data'));
     if(!data) {
       fetch('./data/petBase.json')
@@ -26,6 +13,7 @@ export default class ModelAnimal {
       .then(jsonResponse => {
         localStorage.setItem('data', JSON.stringify(jsonResponse));
         localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
+        localStorage.setItem('history', JSON.stringify([])); // to store order history
         controller.showView(jsonResponse);
       });
     } else {
@@ -65,22 +53,58 @@ export default class ModelAnimal {
     return result;
   }
 
-  handleData() {
-    const data = JSON.parse(localStorage.getItem('data'));
-    const shoppingBasket = JSON.parse(localStorage.getItem('shoppingBasket'));
+  handleData(controller) {
+    const data = JSON.parse(localStorage.getItem('data')),
+          shoppingBasket = JSON.parse(localStorage.getItem('shoppingBasket')),
+          history = JSON.parse(localStorage.getItem('history')),
+          order = {};
+          
+    order.date = new Date();
+    order.name = document.querySelector('.first_name').value;
+    order.lastName = document.querySelector('.last_name').value;
+    order.email = document.querySelector('.email').value;
+    order.items = [];
 
     for (const key in shoppingBasket) {
+      //console.log(shoppingBasket[key]);
       if (shoppingBasket.hasOwnProperty(key)) {
+        order.items.push({
+          pic: shoppingBasket[key].pic, 
+          name: shoppingBasket[key].name, 
+          price: shoppingBasket[key].price * shoppingBasket[key].count, 
+          count: shoppingBasket[key].count});
+
         let index = data.findIndex(element => element.id == key);
         data[index].number -= shoppingBasket[key].count;
         delete shoppingBasket[key];
       }
     }
-    console.log(shoppingBasket);
-    console.log(data);
-     localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
-     localStorage.setItem('data', JSON.stringify(data));
+    history.push(order);
+
+    history.forEach(item => {
+      console.log(item.date);
+    });
+      
+    localStorage.setItem('history', JSON.stringify(history));
+    // console.log(data);
+    controller.showView(data);
+    localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
+    localStorage.setItem('data', JSON.stringify(data));
+    
   }
+
+  filterFromSearch(controller) {
+    const data = JSON.parse(localStorage.getItem('data'));
+    let searchValue = document.querySelector('#search').value,
+        regexp = new RegExp(searchValue, 'gi');
+
+    let foundPets = data.filter(item => {
+      return item.name.match(regexp) !== null;
+    });
+
+    controller.showView(foundPets);
+  }
+
 }
 
 

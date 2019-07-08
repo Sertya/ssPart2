@@ -3,7 +3,6 @@ import ViewStart from './viewStart.js';
 import ViewAnimal from './view.js';
 import ViewBasket from './viewBasket.js';
 
-
 export default class ControllerAnimal {
   constructor() {
     this.model = new ModelAnimal();
@@ -19,7 +18,6 @@ export default class ControllerAnimal {
   signIn() {
     this.view.init(this);
     this.model.loadJSON(this);
-    
   }
 
   showView(data){
@@ -31,11 +29,7 @@ export default class ControllerAnimal {
   }
 
   addToBasket(id) {
-    // console.log(id)
-    // console.log(this)
-    // console.log(this.model)
     let idWarning = this.model.handleShoppingBasket(id, 1);
-    //console.log(idWarning)
     this.viewBasket.renderItems(this, idWarning);
   }
 
@@ -50,11 +44,11 @@ export default class ControllerAnimal {
   }
 
   checkout() {
-    this.model.handleData();
+    this.model.handleData(this);
     this.viewBasket.clearCountTotal();
-    let data = JSON.parse(localStorage.getItem('data'));
-    this.view.render(data, this);
-    
   }
 
+  searchPets() {
+    this.model.filterFromSearch(this);
+  }
 }

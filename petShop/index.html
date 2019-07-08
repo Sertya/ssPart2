@@ -22,12 +22,13 @@
         </div>
         <a href="#" class="brand-logo center black-text"><i class="material-icons logo_icon">pets</i>Pet Shop</a>
         <a class="right btn-flat shopping_basket modal-trigger" href="#modal1"><i class="material-icons ">shopping_basket</i><span class="shopping_basket_count">(0)</span></a>
+        <a class="right btn-flat history" href="#modal1"><i class="material-icons ">history</i></a>
       </div>
     </nav>
     <section class="for_views">
     </section>
 
-    <!-- Modal Structure -->
+    <!-- Modal Structure for Shopping Basket-->
     <div id="modal1" class="modal">
       <div class="modal-content">
         <i class="small material-icons right modal-close">close</i>
@@ -43,10 +44,35 @@
           <!-- сюда отрендерится общая стоимость заказа -->
         </div>
       </div>
-      <div class="center shopping_basket_checkout">
-        <a href="#!" class="modal-close waves-effect waves-light btn">checkout</a>
+      <div class="center modal-close shopping_basket_continue modal-trigger" href="#modal2">
+        <a href="#!" class=" waves-effect waves-light btn " >continue to checkout</a>
       </div>
       <div class="center shopping_basket_close">
+        <a href="#!" class="modal-close waves-effect waves-light btn-flat">close and continue shopping</a>
+      </div>
+    </div>
+    <!-- Modal Structure for Order Form-->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <i class="small material-icons right modal-close">close</i>
+        <h4 class="center">Checkout</h4>
+        <!-- сюда добавить форму для заказа -->
+        <form class="col s12 order_form">
+          <div class="input-field s12">
+            <input id="first_name" type="text" class="validate first_name" value="First Name">
+          </div>
+          <div class="input-field s12">
+            <input id="last_name" type="text" class="validate last_name" value="Last Name">
+          </div>
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate email" value="Email">
+          </div>
+        </form>
+      </div>
+      <div class="center modal-close checkout">
+        <a href="#!" class=" waves-effect waves-light btn">submit</a>
+      </div>
+      <div class="center checkout_close">
         <a href="#!" class="modal-close waves-effect waves-light btn-flat">close and continue shopping</a>
       </div>
     </div>

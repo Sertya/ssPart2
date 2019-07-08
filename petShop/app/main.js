@@ -1,9 +1,8 @@
 import Storage from './storage.js';
 
-document.addEventListener('DOMContentLoaded', Storage.init);
-
 document.addEventListener('DOMContentLoaded', function() {
+  Storage.init();
   M.AutoInit();
   const elems = document.querySelectorAll('.modal');
-  const instance = M.Modal.init(elems);
+  const instances = M.Modal.init(elems);
 });

@@ -8,6 +8,8 @@ export default class ViewStart {
 
     document.querySelector('.input-field').classList.add('hide');
     document.querySelector('.shopping_basket.modal-trigger').classList.add('hide');
+    document.querySelector('.history').classList.add('hide');
+
     let button = document.createElement('a');
 
     button.classList.add('right', 'btn', 'white', 'black-text','sign_in');

@@ -43,14 +43,12 @@
   background-color: #ffffff;
   max-height: 87%;
 }
-.shopping_basket_checkout .btn {
+.shopping_basket_continue .btn, .shopping_basket_checkout .btn{
   margin: 15px;
   background-color: #ffffff;
   color: #000000;
 }
-/* .shopping_basket_container {
-  
-} */
+
 .modal-content .shopping_basket_items {
   max-height: 302px;
   overflow: auto;
@@ -93,6 +91,10 @@
 }
 .shopping_basket_count {
   line-height: 64px;
+}
+.order_form .input-field {
+  position: unset;
+  width: 100%;
 }
 .sign_in {
   font-size: 18px;
