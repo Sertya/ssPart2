@@ -10,6 +10,7 @@ export default class ViewAnimal {
     section.innerHTML = `<div class="row">
         <div class="col s2">
           <ul class="categories">
+            <li class="category">ALL</li>
             <li class="category">DOGS</li>
             <li class="category">CATS</li>
             <li class="category">FISH</li>
@@ -21,14 +22,15 @@ export default class ViewAnimal {
         </div> 
       </div>`;
      
-     document.body.classList.remove('start_img')
-     document.querySelector('.input-field').classList.remove('hide');
-     document.querySelector('.shopping_basket').classList.remove('hide');
-     document.querySelector('.history').classList.remove('hide');
-     document.querySelector('.sign_in').classList.add('hide');
-
-     document.querySelector('.shopping_basket').addEventListener('click', controller.openBasket.bind(controller));
-     document.querySelector('.history').addEventListener('click', controller.openHistory.bind(controller));
+    document.body.classList.remove('start_img')
+    document.querySelector('.input-field').classList.remove('hide');
+    document.querySelector('.shopping_basket').classList.remove('hide');
+    document.querySelector('.history').classList.remove('hide');
+    document.querySelector('.sign_in').classList.add('hide');
+    
+    document.querySelector('.categories').addEventListener('click', controller.selectPets.bind(controller));
+    document.querySelector('.shopping_basket').addEventListener('click', controller.openBasket.bind(controller));
+    document.querySelector('.history').addEventListener('click', controller.openHistory.bind(controller));
 
   }
 
@@ -89,10 +91,8 @@ export default class ViewAnimal {
       items.removeChild(items.firstChild);
     }
   }
+
+  showFilter(element, type) {
+    // TO DO
+  }
 }
-
-
-
-//<i class="small material-icons shopping_basket">shopping_basket</i>
-
-//<a class="waves-effect waves-teal btn-flat>button</a>

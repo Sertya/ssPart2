@@ -1,3 +1,5 @@
+import {Dog, Cat, Fish, Bird} from './pets.js';
+
 export default class ModelAnimal {
 
   loadJSON(controller) {
@@ -11,7 +13,8 @@ export default class ModelAnimal {
         throw new Error('Request failed');
       })
       .then(jsonResponse => {
-        localStorage.setItem('data', JSON.stringify(jsonResponse));
+        let pets = this.pushToData(jsonResponse);
+        localStorage.setItem('data', JSON.stringify(pets));
         localStorage.setItem('shoppingBasket', JSON.stringify({})); // ???
         localStorage.setItem('history', JSON.stringify([])); // to store order history
         controller.showView(jsonResponse);
@@ -20,6 +23,34 @@ export default class ModelAnimal {
       controller.showView(data);
     }
     
+  }
+
+  pushToData(data) {
+    const result = [];
+
+    data.forEach(el => {
+      switch (el.type) {
+        case 'dog':
+          result.push(new Dog(el));
+          break;
+        case 'cat':
+          result.push(new Cat(el));
+          break;
+        case 'fish':
+          result.push(new Fish(el));
+          break;
+        case 'bird':
+          result.push(new Bird(el));
+          break;
+        default:
+          throw {
+            name: 'Error',
+            message: `${el.type} doesn’t exist`
+          };
+      }
+    });
+
+    return result;
   }
 
   handleShoppingBasket(id, point) {
@@ -46,6 +77,7 @@ export default class ModelAnimal {
           shoppingBasket[id].count = 1;
           shoppingBasket[id].left = element.number;
          }
+         
          localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
        }
     });
@@ -100,6 +132,36 @@ export default class ModelAnimal {
     let foundPets = data.filter(item => {
       return item.name.match(regexp) !== null;
     });
+
+    controller.showView(foundPets);
+  }
+
+  filterPets(controller, type) {
+    const data = JSON.parse(localStorage.getItem('data'));
+    let searchValue, foundPets;
+
+    switch (type) {
+      case 'DOGS':
+        searchValue = 'dog'
+        break;
+      case 'CATS':
+        searchValue = 'cat'
+        break;
+      case 'FISH':
+        searchValue = 'fish'
+        break;
+      case 'BIRDS':
+        searchValue = 'bird'
+        break;
+    }
+    
+    if(searchValue !== undefined) {
+      foundPets = data.filter(item => {
+        return item.type == searchValue;
+      });
+    } else {
+      foundPets = data;
+    }
 
     controller.showView(foundPets);
   }

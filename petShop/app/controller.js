@@ -10,7 +10,7 @@ export default class ControllerAnimal {
     this.model = new ModelAnimal();
     this.viewStart = new ViewStart();
     this.view = new ViewAnimal();
-    this.viewBasket = new ViewBasket(this);
+    this.viewBasket = new ViewBasket();
     this.ViewOrderForm = new ViewOrderForm();
     this.ViewHistory = new ViewHistory();
     this.init();
@@ -62,5 +62,10 @@ export default class ControllerAnimal {
 
   searchPets() {
     this.model.filterFromSearch(this);
+  }
+
+  selectPets() {
+    let type = event.target.innerText;
+    this.model.filterPets(this, type);
   }
 }

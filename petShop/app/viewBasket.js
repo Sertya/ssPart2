@@ -1,9 +1,5 @@
 export default class ViewBasket {
 
-  constructor(controller) {
-    this.controller = controller;
-  }
-
   render(controller, idWarning) {
     let data = JSON.parse(localStorage.getItem('shoppingBasket')),
         counter = 0,
@@ -29,8 +25,6 @@ export default class ViewBasket {
      <div class="center shopping_basket_close">
        <a href="#!" class="modal-close waves-effect waves-light btn-flat">close and continue shopping</a>
      </div>`;
-    
-    //this.deleteItem();
 
     document.querySelector('.shopping_basket_continue').addEventListener('click', controller.showOrderForm.bind(controller));
 
@@ -40,6 +34,7 @@ export default class ViewBasket {
       if(key == idWarning) {
         flag = true;
       }
+
       if(data[key].count > 0) {
         this.buildItem(data, key, flag, controller);
         totalCost += (data[key].price * data[key].count);
@@ -49,6 +44,7 @@ export default class ViewBasket {
     }
 
     const items = document.querySelector('.shopping_basket_items');
+
     if(!items.children.length) {
       let div = document.createElement('div');
   
@@ -134,11 +130,4 @@ export default class ViewBasket {
     let totalCountSpan = document.querySelector('.shopping_basket_count');
     totalCountSpan.innerText = `(0)`;
   }
-
-  // deleteItem() {
-  //   const items = document.querySelector('.shopping_basket_items');
-  //   while(items.hasChildNodes()){
-  //     items.removeChild(items.firstChild);
-  //   }
-  // }
 }

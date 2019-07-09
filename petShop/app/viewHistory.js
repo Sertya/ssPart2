@@ -1,4 +1,5 @@
 export default class History {
+
   render(controller) {
     const history = JSON.parse(localStorage.getItem('history'));
 
@@ -15,7 +16,6 @@ export default class History {
     history.forEach(element => {
       this.buildItem(element);
     });
-    //this.deleteItem();
   }
 
   buildItem(order) {
@@ -34,32 +34,36 @@ export default class History {
     parentDiv.appendChild(divDate);
 
     order.items.forEach(item => {
-      let divChild = document.createElement('div');
 
-      divChild.innerHTML = `
-      <div class="card horizontal order_items">
-      
-         <div class="card-image">
-           <img src="${item.pic}">
-         </div>
-         <div class="card-stacked">
-           <div class="card-content">
-            <div class="row">
-              <div class="col s12 m4">
-                  <span class="card-title grey-text text-darken-4">${item.name}</span>
-              </div>
-              <div class="col s12 m2">
-                  <span class="grey-text text-darken-4 history_count">${item.count}</span>
-              </div>
-              <div class="col s12 m2 right">
-                  <span class="grey-text text-darken-4 history_price">$${item.price * item.count}</span>
-              </div>
-            </div>
-           </div>
-         </div>
-        </div>`;
+      if(item.count !== 0) {
+        
+        let divChild = document.createElement('div');
 
-      document.querySelector('.history_list').appendChild(divChild);
+        divChild.innerHTML = `
+          <div class="card horizontal order_items">
+          
+             <div class="card-image">
+               <img src="${item.pic}">
+             </div>
+             <div class="card-stacked">
+               <div class="card-content">
+                <div class="row">
+                  <div class="col s12 m4">
+                      <span class="card-title grey-text text-darken-4">${item.name}</span>
+                  </div>
+                  <div class="col s12 m2">
+                      <span class="grey-text text-darken-4 history_count">${item.count}</span>
+                  </div>
+                  <div class="col s12 m2 right">
+                      <span class="grey-text text-darken-4 history_price">$${item.price * item.count}</span>
+                  </div>
+                </div>
+               </div>
+             </div>
+            </div>`;
+    
+        document.querySelector('.history_list').appendChild(divChild);
+      }
     });
   }
 }

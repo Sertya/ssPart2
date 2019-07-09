@@ -1,8 +1,6 @@
 export default class ViewStart {
 
   showPic(controller) {
-    
-    let section = document.querySelector('.for_views');
 
     document.body.classList.add('start_img');
 
