@@ -17,15 +17,12 @@
 .category:hover {
   border-bottom: solid 1px #000000;
 }
-
-.favorite {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  padding: 4px;
-  border-radius: 100%;
+.btn {
   background-color: #ffffff;
-  color: #EF9A9A;
+  color: #000000;
+}
+.btn:hover{
+  background-color: #ffffff;
 }
 .card .card-content .card-title {
   font-size: 18px;
@@ -49,16 +46,18 @@
   color: #000000;
 }
 
-.modal-content .shopping_basket_items {
+.modal-content .shopping_basket_items, .history_list {
   max-height: 302px;
   overflow: auto;
 }
-.shopping_basket_item .card {
+/* shopping_basket_item */
+.modal .card {
   box-shadow: none;
   margin: 0;
   border-bottom: solid 1px #e0e0e0;
 }
-.shopping_basket_item img {
+/* .shopping_basket_item */
+.modal img {
   width: 150px;
   height: 150px;
   padding: 10px;
@@ -92,6 +91,10 @@
 .shopping_basket_count {
   line-height: 64px;
 }
+.is_empty{
+  color: #EF9A9A;
+  text-align: center;
+}
 .order_form .input-field {
   position: unset;
   width: 100%;
@@ -106,5 +109,15 @@
   background: url(./img/pets.png) no-repeat center ;
   background-size: cover;
   
+}
+.date {
+  margin-top: 10px;
+}
+.history_close {
+  margin-bottom: 20px;
+}
+.history_count, .history_price {
+  margin-left: 20px;
+  line-height: 32px;
 }
 

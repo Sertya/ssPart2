@@ -7,7 +7,7 @@ export default class ViewStart {
     document.body.classList.add('start_img');
 
     document.querySelector('.input-field').classList.add('hide');
-    document.querySelector('.shopping_basket.modal-trigger').classList.add('hide');
+    document.querySelector('.shopping_basket').classList.add('hide');
     document.querySelector('.history').classList.add('hide');
 
     let button = document.createElement('a');

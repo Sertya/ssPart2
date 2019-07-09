@@ -23,11 +23,13 @@ export default class ViewAnimal {
      
      document.body.classList.remove('start_img')
      document.querySelector('.input-field').classList.remove('hide');
-     document.querySelector('.shopping_basket.modal-trigger').classList.remove('hide');
+     document.querySelector('.shopping_basket').classList.remove('hide');
      document.querySelector('.history').classList.remove('hide');
      document.querySelector('.sign_in').classList.add('hide');
 
-     document.querySelector('.checkout').addEventListener('click', controller.checkout.bind(controller));
+     document.querySelector('.shopping_basket').addEventListener('click', controller.openBasket.bind(controller));
+     document.querySelector('.history').addEventListener('click', controller.openHistory.bind(controller));
+
   }
 
   render(data, controller){
@@ -56,7 +58,6 @@ export default class ViewAnimal {
     parentDiv.innerHTML = `<div class="card">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" src="${element.pic}">
-          <i class="small material-icons favorite">favorite_border</i>
         </div>
         <div class="card-content">
         <span class="card-title activator grey-text text-darken-4">${element.name}</span>

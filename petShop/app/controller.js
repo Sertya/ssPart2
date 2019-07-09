@@ -2,6 +2,8 @@ import ModelAnimal from './model.js';
 import ViewStart from './viewStart.js';
 import ViewAnimal from './view.js';
 import ViewBasket from './viewBasket.js';
+import ViewOrderForm from './viewOrderForm.js';
+import ViewHistory from './viewHistory.js';
 
 export default class ControllerAnimal {
   constructor() {
@@ -9,6 +11,8 @@ export default class ControllerAnimal {
     this.viewStart = new ViewStart();
     this.view = new ViewAnimal();
     this.viewBasket = new ViewBasket(this);
+    this.ViewOrderForm = new ViewOrderForm();
+    this.ViewHistory = new ViewHistory();
     this.init();
   }
 
@@ -25,22 +29,30 @@ export default class ControllerAnimal {
   }
 
   openBasket() {
-    this.viewBasket.renderItems(this);
+    this.viewBasket.render(this);
+  }
+
+  openHistory() {
+    this.ViewHistory.render(this);
   }
 
   addToBasket(id) {
     let idWarning = this.model.handleShoppingBasket(id, 1);
-    this.viewBasket.renderItems(this, idWarning);
+    this.viewBasket.render(this, idWarning);
   }
 
   reduceInBasket(id) {
     this.model.handleShoppingBasket(id, -1);
-    this.viewBasket.renderItems(this);
+    this.viewBasket.render(this);
   }
 
   removeFromBasket(id) {
     this.model.handleShoppingBasket(id, 0);
-    this.viewBasket.renderItems(this);
+    this.viewBasket.render(this);
+  }
+
+  showOrderForm() {
+    this.ViewOrderForm.render(this);
   }
 
   checkout() {

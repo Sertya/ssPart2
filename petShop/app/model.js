@@ -57,16 +57,16 @@ export default class ModelAnimal {
     const data = JSON.parse(localStorage.getItem('data')),
           shoppingBasket = JSON.parse(localStorage.getItem('shoppingBasket')),
           history = JSON.parse(localStorage.getItem('history')),
-          order = {};
+          order = {},
+          date = new Date();
           
-    order.date = new Date();
+    order.date = date.toLocaleDateString();
     order.name = document.querySelector('.first_name').value;
     order.lastName = document.querySelector('.last_name').value;
     order.email = document.querySelector('.email').value;
     order.items = [];
 
     for (const key in shoppingBasket) {
-      //console.log(shoppingBasket[key]);
       if (shoppingBasket.hasOwnProperty(key)) {
         order.items.push({
           pic: shoppingBasket[key].pic, 
@@ -86,7 +86,6 @@ export default class ModelAnimal {
     });
       
     localStorage.setItem('history', JSON.stringify(history));
-    // console.log(data);
     controller.showView(data);
     localStorage.setItem('shoppingBasket', JSON.stringify(shoppingBasket));
     localStorage.setItem('data', JSON.stringify(data));
