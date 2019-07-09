@@ -56,6 +56,7 @@ export default class ControllerAnimal {
   }
 
   checkout() {
+    
     this.model.handleData(this);
     this.viewBasket.clearCountTotal();
   }
@@ -65,7 +66,6 @@ export default class ControllerAnimal {
   }
 
   selectPets() {
-    let type = event.target.innerText;
-    this.model.filterPets(this, type);
+    this.model.filterPets(this, event);
   }
 }

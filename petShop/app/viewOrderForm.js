@@ -5,7 +5,7 @@ export default class ViewOrderForm {
        <h4 class="center">Checkout</h4>
        <form class="col s12 order_form">
          <div class="input-field s12">
-           <input id="first_name" type="text" class="validate first_name" placeholder="First Name">
+           <input id="first_name" type="text" class="validate first_name" placeholder="First Name" recuired>
          </div>
          <div class="input-field s12">
            <input id="last_name" type="text" class="validate last_name" placeholder="Last Name">

@@ -91,7 +91,7 @@ export default class ModelAnimal {
           history = JSON.parse(localStorage.getItem('history')),
           order = {},
           date = new Date();
-          
+
     order.date = date.toLocaleDateString();
     order.name = document.querySelector('.first_name').value;
     order.lastName = document.querySelector('.last_name').value;
@@ -136,8 +136,10 @@ export default class ModelAnimal {
     controller.showView(foundPets);
   }
 
-  filterPets(controller, type) {
-    const data = JSON.parse(localStorage.getItem('data'));
+  filterPets(controller, event) {
+    const data = JSON.parse(localStorage.getItem('data')),
+          type = event.target.innerText;
+          
     let searchValue, foundPets;
 
     switch (type) {
